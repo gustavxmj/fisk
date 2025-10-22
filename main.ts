@@ -1,3 +1,9 @@
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
+    game.gameOver(true)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
+    game.gameOver(false)
+})
 scene.setBackgroundColor(9)
 tiles.setCurrentTilemap(tilemap`level1`)
 let fisk = sprites.create(img`
@@ -20,3 +26,5 @@ let fisk = sprites.create(img`
     `, SpriteKind.Player)
 controller.moveSprite(fisk)
 scene.cameraFollowSprite(fisk)
+game.setGameOverEffect(true, effects.smiles)
+game.setGameOverEffect(false, effects.slash)
