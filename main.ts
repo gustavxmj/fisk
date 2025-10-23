@@ -1,9 +1,18 @@
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.chestClosed, function (sprite, location) {
-    game.gameOver(true)
+    if (found_key == 1) {
+        game.gameOver(true)
+    } else if (found_key == 0) {
+        music.play(music.createSoundEffect(WaveShape.Square, 2631, 0, 255, 0, 500, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
+    }
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
     game.gameOver(false)
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
+    tiles.setTileAt(location, assets.tile`transparency16`)
+    found_key = 1
+})
+let found_key = 0
 scene.setBackgroundColor(9)
 tiles.setCurrentTilemap(tilemap`level1`)
 let fisk = sprites.create(img`
@@ -28,3 +37,4 @@ controller.moveSprite(fisk)
 scene.cameraFollowSprite(fisk)
 game.setGameOverEffect(true, effects.smiles)
 game.setGameOverEffect(false, effects.slash)
+found_key = 0
